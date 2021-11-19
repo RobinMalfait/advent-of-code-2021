@@ -1,0 +1,34 @@
+{
+  "name": "advent-of-code",
+  "private": true,
+  "version": "0.0.0-development",
+  "type": "module",
+  "scripts": {
+    "test": "NODE_OPTIONS=--experimental-vm-modules jest src",
+    "tdd": "yarn test --watchAll",
+    "setup": "node ./setup.js",
+    "bench": "node ./bench.js",
+    "format": "prettier '**/*' --write --ignore-unknown"
+  },
+  "prettier": {
+    "semi": false,
+    "singleQuote": true,
+    "printWidth": 160,
+    "trailingComma": "es5",
+    "arrowParens": "always",
+    "tabWidth": 2,
+    "useTabs": false,
+    "quoteProps": "as-needed",
+    "bracketSpacing": true
+  },
+  "keywords": [],
+  "author": "Robin Malfait <malfait.robin@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "cli-table": "^0.3.1",
+    "jest": "^27.3.1",
+    "node-fetch": "^3.1.0",
+    "prettier": "^2.2.1",
+    "pretty-ms": "^7.0.1"
+  }
+}
