@@ -2,10 +2,7 @@ import fs from 'fs'
 import path from 'path'
 import fetch from 'node-fetch'
 
-let day = process.argv[2]
-
-if (!day) throw new Error('Usage: yarn setup <day>')
-day = day.padStart(2, '0')
+let day = (process.argv[2] ?? new Date().getDate().toString()).padStart(2, '0')
 
 function data(...paths) {
   return path.resolve(process.cwd(), 'data', ...paths)
