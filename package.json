@@ -4,7 +4,7 @@
   "version": "0.0.0-development",
   "type": "module",
   "scripts": {
-    "test": "NODE_OPTIONS=--experimental-vm-modules jest src",
+    "test": "NODE_OPTIONS=--experimental-vm-modules jest",
     "tdd": "yarn test --watchAll",
     "setup": "node ./setup.js",
     "bench": "node ./bench.js",
@@ -24,6 +24,12 @@
   "keywords": [],
   "author": "Robin Malfait <malfait.robin@gmail.com>",
   "license": "MIT",
+  "jest": {
+    "testPathIgnorePatterns": [
+      "/node_modules/",
+      "/template/"
+    ]
+  },
   "dependencies": {
     "cli-table": "^0.3.1",
     "jest": "^27.3.1",
