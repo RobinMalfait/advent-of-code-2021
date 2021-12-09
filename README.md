@@ -17,6 +17,7 @@
 |  06 |        34µs 93ns |       44µs 571ns |
 |  07 |  4ms 218µs 627ns |  4ms 806µs 820ns |
 |  08 |      262µs 693ns |      663µs 308ns |
+|  09 |      459µs 729ns |  3ms 246µs 472ns |
 
 [^aoc]: [Advent of Code][aoc] – is an Advent calendar of small programming puzzles for a variety of skill sets and skill levels that can be solved in any programming language you like. People use them as a speed contest, interview prep, company training, university coursework, practice problems, or to challenge each other.
 
