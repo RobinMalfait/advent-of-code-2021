@@ -1,3 +1,6 @@
+let DOT = '\u2588'
+let EMPTY = ' '
+
 export default function (blob) {
   let [points, instructions] = blob.trim().split('\n\n')
   points = points.split('\n').map((point) => point.split(',').map(Number))
@@ -11,12 +14,12 @@ export default function (blob) {
 
   let grid = Array.from({ length: maxY })
     .fill(0)
-    .map(() => Array.from({ length: maxX }).fill('.'))
+    .map(() => Array.from({ length: maxX }).fill(EMPTY))
 
   // Build initial grid
   for (let [x, y] of points) {
     grid[y] ??= []
-    grid[y][x] = '#'
+    grid[y][x] = DOT
   }
 
   // Apply instructions
@@ -32,8 +35,8 @@ export default function (blob) {
       for (let x = 0; x < bottom[y].length; x++) {
         let posY = top.length - y - 1
 
-        if (top[posY][x] === '.' && bottom[y][x] === '#') {
-          top[posY][x] = '#'
+        if (top[posY][x] === EMPTY && bottom[y][x] === DOT) {
+          top[posY][x] = DOT
         }
       }
     }
@@ -44,7 +47,7 @@ export default function (blob) {
     }
   }
 
-  return grid.map((line) => line.join('')).join('\n')
+  return '\n' + grid.map((line) => line.join('')).join('\n') + '\n'
 }
 
 function transpose(grid) {

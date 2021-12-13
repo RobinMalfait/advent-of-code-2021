@@ -49,26 +49,30 @@ describe('Part 1', () => {
 })
 
 describe('Part 2', () => {
-  it.each([[test, null]])('should produce the correct value for example %#', (input, expected) => {
+  it.each([[test]])('should produce the correct value for example %#', (input) => {
     expect(part2(input)).toMatchInlineSnapshot(`
-      "#####
-      #...#
-      #...#
-      #...#
-      #####
-      .....
-      ....."
+      "
+      █████
+      █   █
+      █   █
+      █   █
+      █████
+           
+           
+      "
     `)
   })
 
   it('should produce the correct value for the input data', async () => {
     expect(part2(await data)).toMatchInlineSnapshot(`
-      "####.###..#.....##..###..#..#.#....###..
-      #....#..#.#....#..#.#..#.#..#.#....#..#.
-      ###..#..#.#....#....#..#.#..#.#....#..#.
-      #....###..#....#.##.###..#..#.#....###..
-      #....#....#....#..#.#.#..#..#.#....#.#..
-      ####.#....####..###.#..#..##..####.#..#."
+      "
+      ████ ███  █     ██  ███  █  █ █    ███  
+      █    █  █ █    █  █ █  █ █  █ █    █  █ 
+      ███  █  █ █    █    █  █ █  █ █    █  █ 
+      █    ███  █    █ ██ ███  █  █ █    ███  
+      █    █    █    █  █ █ █  █  █ █    █ █  
+      ████ █    ████  ███ █  █  ██  ████ █  █ 
+      "
     `)
   })
 })
