@@ -5,48 +5,72 @@ export default function (blob) {
 }
 
 function evaluate(packet) {
-  // Sum
-  if (packet.typeId === 0) {
-    return packet.packets.map((packet) => evaluate(packet)).reduce((total, current) => total + current, 0)
-  }
+  switch (packet.typeId) {
+    // Sum
+    case 0: {
+      let total = 0
+      for (let other of packet.packets) {
+        total += evaluate(other)
+      }
+      return total
+    }
 
-  // Product
-  else if (packet.typeId === 1) {
-    return packet.packets.map((packet) => evaluate(packet)).reduce((total, current) => total * current, 1)
-  }
+    // Product
+    case 1: {
+      let total = 1
+      for (let other of packet.packets) {
+        total *= evaluate(other)
+      }
+      return total
+    }
 
-  // Minimum
-  else if (packet.typeId === 2) {
-    return Math.min(...packet.packets.map((packet) => evaluate(packet)))
-  }
+    // Minimum
+    case 2: {
+      let min = Number.MAX_SAFE_INTEGER
+      for (let other of packet.packets) {
+        let value = evaluate(other)
+        if (value < min) {
+          min = value
+        }
+      }
+      return min
+    }
 
-  // Maximum
-  else if (packet.typeId === 3) {
-    return Math.max(...packet.packets.map((packet) => evaluate(packet)))
-  }
+    // Maximum
+    case 3: {
+      let min = Number.MIN_SAFE_INTEGER
+      for (let other of packet.packets) {
+        let value = evaluate(other)
+        if (value > min) {
+          min = value
+        }
+      }
+      return min
+    }
 
-  // Literal
-  else if (packet.typeId === 4) {
-    return packet.value
-  }
+    // Literal
+    case 4: {
+      return packet.value
+    }
 
-  // Greater than
-  else if (packet.typeId === 5) {
-    return evaluate(packet.packets[0]) > evaluate(packet.packets[1]) ? 1 : 0
-  }
+    // Greater than
+    case 5: {
+      return evaluate(packet.packets[0]) > evaluate(packet.packets[1]) ? 1 : 0
+    }
 
-  // Less than
-  else if (packet.typeId === 6) {
-    return evaluate(packet.packets[0]) < evaluate(packet.packets[1]) ? 1 : 0
-  }
+    // Less than
+    case 6: {
+      return evaluate(packet.packets[0]) < evaluate(packet.packets[1]) ? 1 : 0
+    }
 
-  // Equal to
-  else if (packet.typeId === 7) {
-    return evaluate(packet.packets[0]) === evaluate(packet.packets[1]) ? 1 : 0
-  }
+    // Equal to
+    case 7: {
+      return evaluate(packet.packets[0]) === evaluate(packet.packets[1]) ? 1 : 0
+    }
 
-  // Unreachable
-  else {
-    throw new Error('Unknown typeId: ' + packet.typeId)
+    // Unreachable
+    default: {
+      throw new Error('Unknown typeId: ' + packet.typeId)
+    }
   }
 }
