@@ -1,13 +1,3 @@
-function read(binary, bits, state) {
-  let result = binary.slice(state.ptr, state.ptr + bits)
-  state.ptr += bits
-  return result
-}
-
-function readAsNumber(binary, bits, state) {
-  return parseInt(read(binary, bits, state), 2)
-}
-
 export function parse(blob) {
   let number = BigInt('0x' + blob.trim())
   let binary = number.toString(2)
@@ -18,7 +8,7 @@ export function parse(blob) {
   return _parse(binary)
 }
 
-export function _parse(binary, state = { ptr: 0 }) {
+function _parse(binary, state = { ptr: 0 }) {
   let version = readAsNumber(binary, 3, state)
   let typeId = readAsNumber(binary, 3, state)
 
@@ -46,7 +36,7 @@ export function _parse(binary, state = { ptr: 0 }) {
     let substate = { ptr: 0 }
     let packets = []
 
-    while (subPacketsBinary.slice(substate.ptr)) {
+    while (substate.ptr < subPacketsBinary.length) {
       packets.push(_parse(subPacketsBinary, substate))
     }
 
@@ -64,4 +54,14 @@ export function _parse(binary, state = { ptr: 0 }) {
 
     return { version, typeId, packets }
   }
+}
+
+function read(binary, bits, state) {
+  let result = binary.slice(state.ptr, state.ptr + bits)
+  state.ptr += bits
+  return result
+}
+
+function readAsNumber(binary, bits, state) {
+  return parseInt(read(binary, bits, state), 2)
 }
